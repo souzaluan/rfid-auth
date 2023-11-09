@@ -1,6 +1,6 @@
 import { DataSourceOptions } from 'typeorm'
 import { resolve } from 'node:path'
-import { databaseConfig } from 'config/database'
+import { databaseConfig } from '../../../config/database'
 
 export const defaultDataSourceOptions: DataSourceOptions = {
   type: 'postgres',
