@@ -1,8 +1,10 @@
-import { EntityTarget, ObjectLiteral } from 'typeorm'
+import { EntityTarget, ObjectLiteral, Repository } from 'typeorm'
 
 import { instance } from '..'
 
-export const getRepository = (entity: EntityTarget<ObjectLiteral>) => {
+export const getRepository = <Entity extends ObjectLiteral>(
+  entity: EntityTarget<Entity>,
+): Repository<Entity> => {
   const repository = instance.getRepository(entity)
 
   return repository
