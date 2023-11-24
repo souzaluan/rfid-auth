@@ -9,10 +9,24 @@ services:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_DB: ${DB_NAME}
     ports: 
-      - ${DB_PORT}:5432
+      - 5435:${DB_PORT}
     volumes:
       - pgdata:/data/postgres
     restart: always
+
+  api:
+    build: .
+    container_name: 'rfid-auth-api'
+    restart: always
+    working_dir: /usr/app/src
+    ports:
+      - 3335:3335
+    volumes:
+      - ./src:/usr/app/src
+    links:
+      - database
+    depends_on:
+      - database
 
 volumes:
     pgdata:

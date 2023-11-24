@@ -1,4 +1,4 @@
-import { UserEntity } from 'modules/users/infra/typeorm/entities/UserEntity'
+import { UserEntity } from '../../../../users/infra/typeorm/entities/UserEntity'
 import { IApplication } from '../../../domain/IApplication'
 import {
   Column,
