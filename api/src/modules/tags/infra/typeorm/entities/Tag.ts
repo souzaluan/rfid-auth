@@ -1,5 +1,5 @@
 import { ITag } from '../../../domain/ITag'
-import { IUserEntity } from '../../../../users/domain/IUserEntity'
+import { IUser } from '../../../../users/domain/IUser'
 import { UserEntity } from '../../../../users/infra/typeorm/entities/UserEntity'
 import {
   Column,
@@ -22,7 +22,7 @@ export class Tag implements ITag {
 
   @ManyToOne(() => UserEntity, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
-  user: IUserEntity
+  user: IUser
 
   @Column({ name: 'user_id' })
   userId: string

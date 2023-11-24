@@ -4,7 +4,7 @@ import { IUsersRepository } from '../repositories/IUsersRepository'
 import { BadRequestError } from '../../../common/error/BadRequestError'
 import { CreateUserService } from './CreateUserService'
 import { HashStrategy } from '../helpers/HashStrategy'
-import { IUserEntity } from '../domain/IUserEntity'
+import { IUser } from '../domain/IUser'
 
 let usersRepository: IUsersRepository
 let sut: CreateUserService
@@ -43,7 +43,7 @@ describe('Create User Service', () => {
 
     const createdUserWithPassword = (await usersRepository.findById(
       createdUser.id,
-    )) as IUserEntity
+    )) as IUser
 
     const passwordIsCorrectlyHashed = await HashStrategy.compare({
       raw: '123',

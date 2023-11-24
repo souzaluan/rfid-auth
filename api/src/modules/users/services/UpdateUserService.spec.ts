@@ -4,7 +4,7 @@ import { NotFoundError } from '../../../common/error/NotFoundError'
 import { UpdateUserService } from './UpdateUserService'
 import { IUpdateUserRequestDTO } from '../dtos/IUpdateUserDTO'
 import { HashStrategy } from '../helpers/HashStrategy'
-import { IUserEntity } from '../domain/IUserEntity'
+import { IUser } from '../domain/IUser'
 import { BadRequestError } from '../../../common/error/BadRequestError'
 
 let usersRepository: IUsersRepository
@@ -56,7 +56,7 @@ describe('Update User Service', () => {
 
     const updatedUserWithPassword = (await usersRepository.findById(
       createdUser.id,
-    )) as IUserEntity
+    )) as IUser
 
     const passwordIsCorrectlyHashed = await HashStrategy.compare({
       raw: '12345',

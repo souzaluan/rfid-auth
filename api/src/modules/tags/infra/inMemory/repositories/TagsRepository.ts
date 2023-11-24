@@ -2,7 +2,7 @@ import { ITag } from '../../../domain/ITag'
 import { ICreateTagDTO } from '../../../dtos/ICreateTagDTO'
 import { IFindTagRequestDTO } from '../../../dtos/IFindTagDTO'
 import { ITagsRepository } from '../../../repositories/ITagsRepository'
-import { IUserEntity } from '../../../../users/domain/IUserEntity'
+import { IUser } from '../../../../users/domain/IUser'
 
 export class TagsRepository implements ITagsRepository {
   private tags: ITag[] = []
@@ -10,7 +10,7 @@ export class TagsRepository implements ITagsRepository {
   async create(data: ICreateTagDTO) {
     const createTagData: ITag = {
       id: `tag-${this.tags.length}`,
-      user: {} as IUserEntity,
+      user: {} as IUser,
       ...data,
     }
 
@@ -35,6 +35,12 @@ export class TagsRepository implements ITagsRepository {
       items: result.length,
       pages: Math.ceil(result.length / pageSize),
     })
+  }
+
+  async findById(tagId: string): Promise<ITag | null> {
+    const tag = this.tags.find((tag) => tag.id === tagId) ?? null
+
+    return tag
   }
 
   async findByCodeAndUser(tagCode: string, userId: string) {

@@ -43,6 +43,12 @@ export class TagsRepository implements ITagsRepository {
     }
   }
 
+  async findById(tagId: string) {
+    const tag = await this.repository.findOneBy({ id: tagId })
+
+    return tag
+  }
+
   async findByCodeAndUser(tagCode: string, userId: string) {
     const tag = await this.repository.findOneBy({ code: tagCode, userId })
 

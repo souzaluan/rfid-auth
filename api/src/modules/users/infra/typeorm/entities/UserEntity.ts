@@ -1,9 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
-import { IUserEntity } from '../../../domain/IUserEntity'
+import { IUser } from '../../../domain/IUser'
 
 @Entity('users')
-export class UserEntity implements IUserEntity {
+export class UserEntity implements IUser {
   @PrimaryGeneratedColumn('uuid')
   id: string
 

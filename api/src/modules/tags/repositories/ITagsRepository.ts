@@ -5,5 +5,6 @@ import { IFindTagRequestDTO, IFindTagResponseDTO } from '../dtos/IFindTagDTO'
 export interface ITagsRepository {
   create(data: ICreateTagDTO): Promise<ITag>
   find(query: IFindTagRequestDTO): Promise<IFindTagResponseDTO>
+  findById(tagId: string): Promise<ITag | null>
   findByCodeAndUser(tagCode: string, userId: string): Promise<ITag | null>
 }

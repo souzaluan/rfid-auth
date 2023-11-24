@@ -4,14 +4,14 @@ import { getRepository } from '../../../../../infra/typeorm/helpers/connection'
 
 import { IUsersRepository } from '../../../repositories/IUsersRepository'
 
-import { IUserEntity } from '../../../domain/IUserEntity'
+import { IUser } from '../../../domain/IUser'
 import { UserEntity } from '../entities/UserEntity'
 
 import { ICreateUserDTO } from '../../../dtos/ICreateUserDTO'
 import { IUpdateUserDTO } from '../../../dtos/IUpdateUserDTO'
 
 export class UsersRepository implements IUsersRepository {
-  private repository: Repository<IUserEntity>
+  private repository: Repository<IUser>
 
   constructor() {
     this.repository = getRepository(UserEntity)

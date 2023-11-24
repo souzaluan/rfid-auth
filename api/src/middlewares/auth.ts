@@ -5,6 +5,7 @@ import { decode, verify } from 'jsonwebtoken'
 
 import { UnauthorizedError } from '../common/error/UnauthorizedError'
 import { GetUserService } from '../modules/users/services/GetUserService'
+import { authConfig } from '../config/auth'
 
 interface IToken {
   sub: string
@@ -30,7 +31,7 @@ export const authenticated = async (
     throw new UnauthorizedError('Token expirado')
   }
 
-  const { sub } = verify(token, process.env.JWT_SECRET as string) as IToken
+  const { sub } = verify(token, authConfig.secret) as IToken
 
   const getUserService = container.resolve(GetUserService)
   const user = await getUserService.execute(sub)

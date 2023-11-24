@@ -1,3 +1,3 @@
-import { IUserEntity } from '../domain/IUserEntity'
+import { IUser } from '../domain/IUser'
 
-export type IUserResponseDTO = Omit<IUserEntity, 'password'>
+export type IUserResponseDTO = Omit<IUser, 'password'>

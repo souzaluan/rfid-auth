@@ -1,13 +1,13 @@
-import { IUserEntity } from 'modules/users/domain/IUserEntity'
+import { IUser } from 'modules/users/domain/IUser'
 import { ICreateUserDTO } from 'modules/users/dtos/ICreateUserDTO'
 import { IUpdateUserDTO } from 'modules/users/dtos/IUpdateUserDTO'
 import { IUsersRepository } from 'modules/users/repositories/IUsersRepository'
 
 export class UsersRepository implements IUsersRepository {
-  private users: IUserEntity[] = []
+  private users: IUser[] = []
 
   async create(data: ICreateUserDTO) {
-    const createUserData: IUserEntity = {
+    const createUserData: IUser = {
       id: `user-${this.users.length}`,
       ...data,
     }
@@ -22,7 +22,7 @@ export class UsersRepository implements IUsersRepository {
       (user) => user.id === data.id,
     )
 
-    const updateUserData: IUserEntity = {
+    const updateUserData: IUser = {
       ...this.users[toUpdateUserIndex],
       ...data,
     }

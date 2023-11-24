@@ -7,6 +7,7 @@ import {
 import { HashStrategy } from '../helpers/HashStrategy'
 import { sign } from 'jsonwebtoken'
 import { BadRequestError } from '../../../common/error/BadRequestError'
+import { authConfig } from '../../../config/auth'
 
 @injectable()
 export class AuthenticateService {
@@ -38,7 +39,7 @@ export class AuthenticateService {
       {
         sub: user.id,
       },
-      process.env.JWT_SECRET as string,
+      authConfig.secret,
     )
 
     return {
