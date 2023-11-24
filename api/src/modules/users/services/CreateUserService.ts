@@ -15,6 +15,7 @@ export class CreateUserService {
   async execute({
     email,
     password,
+    tag,
   }: ICreateUserDTO): Promise<IUserResponseDTO> {
     const user = await this.usersRepository.findByEmail(email)
 
@@ -27,6 +28,7 @@ export class CreateUserService {
     const createdUser = await this.usersRepository.create({
       email,
       password: hashedPassword,
+      tag,
     })
 
     return {

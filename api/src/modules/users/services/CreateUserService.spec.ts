@@ -19,6 +19,7 @@ describe('Create User Service', () => {
     const user = await sut.execute({
       email: 'luan@souza.com',
       password: '123',
+      tag: 'any-tag-code',
     })
 
     expect(user.email).toBe('luan@souza.com')
@@ -28,6 +29,7 @@ describe('Create User Service', () => {
     const createUserData: ICreateUserDTO = {
       email: 'luan@souza.com',
       password: '123',
+      tag: 'any-tag-code',
     }
 
     await sut.execute(createUserData)
@@ -39,6 +41,7 @@ describe('Create User Service', () => {
     const createdUser = await sut.execute({
       email: 'luan@souza.com',
       password: '123',
+      tag: 'any-tag-code',
     })
 
     const createdUserWithPassword = (await usersRepository.findById(

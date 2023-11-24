@@ -7,8 +7,11 @@ export class UserEntity implements IUser {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column()
+  @Column({ unique: true })
   email: string
+
+  @Column()
+  tag: string
 
   @Column()
   password: string

@@ -20,6 +20,7 @@ describe('Update User Service', () => {
     const createdUser = await usersRepository.create({
       email: 'luan@souza.com',
       password: '123',
+      tag: 'any-tag-code',
     })
 
     const updatedUser = await sut.execute({
@@ -46,6 +47,7 @@ describe('Update User Service', () => {
     const createdUser = await usersRepository.create({
       email: 'luan@souza.com',
       password: '123',
+      tag: 'any-tag-code',
     })
 
     await sut.execute({
@@ -70,6 +72,7 @@ describe('Update User Service', () => {
     const createdUser = await usersRepository.create({
       email: 'luan@souza.com',
       password: '123',
+      tag: 'any-tag-code',
     })
 
     await expect(
@@ -85,11 +88,13 @@ describe('Update User Service', () => {
     await usersRepository.create({
       email: 'already-registered@email.com',
       password: '12345',
+      tag: 'any-tag-code',
     })
 
     const createdUser = await usersRepository.create({
       email: 'luan@souza.com',
       password: '123',
+      tag: 'any-tag-code',
     })
 
     await expect(
@@ -104,6 +109,7 @@ describe('Update User Service', () => {
     const createdUser = await usersRepository.create({
       email: 'luan@souza.com',
       password: '123',
+      tag: 'any-tag-code',
     })
 
     const updatedUser = await sut.execute({

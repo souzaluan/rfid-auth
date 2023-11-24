@@ -18,6 +18,7 @@ describe('Authenticate Service', () => {
     const createUserData: ICreateUserDTO = {
       email: 'luan@souza.com',
       password: await HashStrategy.hash('123'),
+      tag: 'any-tag-code',
     }
 
     await usersRepository.create(createUserData)
@@ -35,6 +36,7 @@ describe('Authenticate Service', () => {
     await usersRepository.create({
       email: 'luan@souza.com',
       password: await HashStrategy.hash('123'),
+      tag: 'any-tag-code',
     })
 
     await expect(
@@ -49,6 +51,7 @@ describe('Authenticate Service', () => {
     await usersRepository.create({
       email: 'luan@souza.com',
       password: await HashStrategy.hash('123'),
+      tag: 'any-tag-code',
     })
 
     await expect(

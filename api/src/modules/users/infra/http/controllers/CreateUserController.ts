@@ -10,14 +10,19 @@ export class CreateUserController {
     [Segments.BODY]: {
       email: Joi.string().email().required(),
       password: Joi.string().required(),
+      tag: Joi.string().required(),
     },
   })
 
   async handle(request: Request, response: Response) {
-    const { email, password } = request.body
+    const { email, password, tag } = request.body
 
     const createUserService = container.resolve(CreateUserService)
-    const createdUser = await createUserService.execute({ email, password })
+    const createdUser = await createUserService.execute({
+      email,
+      password,
+      tag,
+    })
 
     return response.status(201).json(createdUser)
   }

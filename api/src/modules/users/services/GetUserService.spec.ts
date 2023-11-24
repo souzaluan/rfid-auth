@@ -16,6 +16,7 @@ describe('Get User Service', () => {
     const createdUser = await usersRepository.create({
       email: 'luan@souza.com',
       password: '123',
+      tag: 'any-tag-code',
     })
 
     const user = await sut.execute(createdUser.id)
