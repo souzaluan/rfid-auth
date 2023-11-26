@@ -2,12 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  * {
-    @apply box-border
-  }
-
-  a {
-    @apply no-underline
-  }
+@layer components {
+    .purple-gradient {
+        @apply bg-gradient-to-r from-violet-900 to-violet-400
+    }
 }
