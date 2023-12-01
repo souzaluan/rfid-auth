@@ -1,6 +1,7 @@
 {
   "extends": ["next/core-web-vitals", "@rocketseat/eslint-config/next"],
   "rules": {
-    "@typescript-eslint/no-unused-vars": "error"
+    "@typescript-eslint/no-unused-vars": "error",
+    "react-hooks/exhaustive-deps": "off"
   }
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import fonts from '../config/fonts'
 import '../styles/globals.css'
+import { Toaster } from '@/components/ui/toaster'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,7 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ptBR">
-      <body className={fonts.inter.className}>{children}</body>
+      <body className={fonts.inter.className}>
+        {children}
+        <Toaster />
+      </body>
     </html>
   )
 }

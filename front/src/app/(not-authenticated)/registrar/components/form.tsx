@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect } from 'react'
+
 import {
   Form,
   FormControl,
@@ -15,11 +17,10 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-interface IRegisterData {
-  email: string
-  password: string
-  tag: string
-}
+import io from 'socket.io-client'
+import { alovaInstance } from '@/services/alova-instance'
+import { useToast } from '@/components/ui/use-toast'
+import { useRouter } from 'next/navigation'
 
 const registerSchema = z.object({
   email: z
@@ -38,20 +39,55 @@ const registerSchema = z.object({
   }),
 })
 
+type IRegisterData = z.infer<typeof registerSchema>
+
+function createUserRequest(data: IRegisterData) {
+  return alovaInstance.Post('/users', data).send()
+}
+
 export function RegisterForm() {
+  const router = useRouter()
+
+  const { toast } = useToast()
+
   const form = useForm<IRegisterData>({
     resolver: zodResolver(registerSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      tag: '',
+    },
   })
 
-  const { handleSubmit, control } = form
+  const { handleSubmit, control, setValue } = form
 
   async function handleRegister({
     email,
     password,
     tag,
   }: IRegisterData): Promise<void> {
-    Promise.resolve({ email, password, tag })
+    try {
+      await createUserRequest({ email, password, tag })
+
+      router.replace('/painel')
+    } catch {
+      toast({
+        title: 'Erro',
+        description: 'Ops! Não foi possível concluir seu cadastro.',
+        duration: 5000,
+      })
+    }
   }
+
+  useEffect(() => {
+    const socket = io('http://localhost:3001')
+
+    socket.on('received-id', (data) => setValue('tag', data))
+
+    return () => {
+      socket.disconnect()
+    }
+  }, [])
 
   return (
     <Form {...form}>
@@ -98,13 +134,11 @@ export function RegisterForm() {
               return (
                 <FormItem className="space-y-1">
                   <FormLabel>Tag</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Aproxime sua tag"
-                      {...field}
-                    />
-                  </FormControl>
+                  <Input
+                    type="password"
+                    placeholder="Aproxime sua tag"
+                    {...field}
+                  />
                   <FormMessage />
                 </FormItem>
               )

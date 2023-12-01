@@ -6,20 +6,24 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "server": "nodemon src/config/websocket.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
+    "alova": "^2.15.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.293.0",
     "next": "14.0.3",
+    "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.48.2",
+    "socket.io-client": "^4.7.2",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4"
