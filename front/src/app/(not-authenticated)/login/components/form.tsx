@@ -14,11 +14,10 @@ import { Button } from '@/components/ui/button'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-
-interface ILoginData {
-  email: string
-  password: string
-}
+import { signIn } from 'next-auth/react'
+import { useToast } from '@/components/ui/use-toast'
+import { useRouter } from 'next/navigation'
+import Error from 'next/error'
 
 const loginSchema = z.object({
   email: z
@@ -34,7 +33,25 @@ const loginSchema = z.object({
   }),
 })
 
+type ILoginData = z.infer<typeof loginSchema>
+
+async function loginRequest({ email, password }: ILoginData) {
+  const result = await signIn('credentials', {
+    email,
+    password,
+    redirect: false,
+  })
+
+  if (result?.error) {
+    throw new Error(result.error)
+  }
+}
+
 export function LoginForm() {
+  const { toast } = useToast()
+
+  const router = useRouter()
+
   const form = useForm<ILoginData>({
     resolver: zodResolver(loginSchema),
   })
@@ -42,7 +59,13 @@ export function LoginForm() {
   const { handleSubmit, control } = form
 
   async function handleLogin({ email, password }: ILoginData): Promise<void> {
-    Promise.resolve({ email, password })
+    try {
+      await loginRequest({ email, password })
+
+      router.replace('/')
+    } catch (error) {
+      toast({ title: 'Erro', description: error?.message })
+    }
   }
 
   return (

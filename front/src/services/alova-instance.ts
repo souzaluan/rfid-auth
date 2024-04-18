@@ -10,11 +10,11 @@ export const alovaInstance = createAlova({
   requestAdapter: GlobalFecth(),
   responded: {
     onSuccess: async (response) => {
-      if (!response.ok) {
-        throw new Error(response.statusText)
-      }
-
       const json = await response.json()
+
+      if (!response.ok) {
+        throw new Error(json.message)
+      }
 
       return json
     },
